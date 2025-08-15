@@ -85,53 +85,9 @@ export default function Home() {
     }
   };
 
+  // Show loading skeleton while data is loading (performance optimized)
   if (isLoading || showLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900 relative overflow-hidden">
-        <SnowflakeAnimation />
-        
-        {/* Simplified background effect */}
-        <div className="absolute inset-0 bg-gradient-radial from-purple-500/10 via-transparent to-transparent"></div>
-        
-        {/* Cleaner loading container */}
-        <div className="relative z-10 flex flex-col items-center space-y-6">
-          {/* Logo with subtle animation */}
-          <div className="relative">
-            <img 
-              src="/assets/d692fdfb50225839abac00cae33f6006_1755073573630.png" 
-              alt="Strike Cheats Logo" 
-              className="h-20 w-20 rounded-full border-2 shadow-xl animate-pulse-slow transition-all duration-1000"
-              style={{
-                borderColor: `${currentTheme.primary}80`,
-                boxShadow: `0 0 25px ${currentTheme.primary}40`
-              }}
-            />
-          </div>
-
-          {/* Clean title */}
-          <div className="text-center">
-            <h1 
-              className="text-3xl font-bold text-white mb-2"
-              style={{fontFamily: 'Inter, sans-serif'}}
-            >
-              Strike Cheats
-            </h1>
-            <p className="text-slate-400 text-sm">Loading premium experience...</p>
-          </div>
-
-          {/* Modern loading spinner */}
-          <div className="relative">
-            <div 
-              className="w-12 h-12 rounded-full border-2 border-transparent animate-spin"
-              style={{
-                borderTopColor: currentTheme.primary,
-                borderRightColor: `${currentTheme.primary}40`
-              }}
-            ></div>
-          </div>
-        </div>
-      </div>
-    );
+    return <PageLoadingSkeleton />;
   }
 
   if (error) {
