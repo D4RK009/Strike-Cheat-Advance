@@ -103,7 +103,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-slate-900">
-      <SnowflakeAnimation />
+      <Suspense fallback={null}>
+        <SnowflakeAnimation />
+      </Suspense>
       
       {/* Modern Navigation */}
       <nav className="bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50 sticky top-0 z-50">
@@ -209,102 +211,27 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Enhanced Hero Section */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 to-slate-900/50"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="mb-8">
-            <img 
-              src="/assets/d692fdfb50225839abac00cae33f6006_1755073573630.png" 
-              alt="Strike Cheats Logo" 
-              className="h-16 w-16 mx-auto rounded-full border-2 border-purple-500/50 shadow-2xl"
-            />
-          </div>
-          
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
-            Elite Gaming <span className="text-purple-400">Advantage</span>
-          </h1>
-          
-          <p className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Professional-grade gaming enhancements with undetectable technology. 
-            Join elite gamers worldwide and dominate every match.
-          </p>
-          
-          <div className="flex flex-wrap justify-center items-center gap-8 text-slate-400 mb-8">
-            <div className="flex items-center space-x-2">
-              <Shield className="text-green-400 h-5 w-5" />
-              <span>99.9% Undetected</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Users className="text-blue-400 h-5 w-5" />
-              <span>10K+ Active Users</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Star className="text-yellow-400 h-5 w-5" />
-              <span>5-Star Support</span>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg"
-              className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 text-lg"
-              onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              <Zap className="mr-2 h-5 w-5" />
-              View Products
-            </Button>
-            <Button 
-              variant="outline"
-              size="lg" 
-              className="border-slate-600 text-slate-300 hover:bg-slate-800 px-8 py-4 text-lg"
-              onClick={handleDiscordContact}
-            >
-              <MessageCircle className="mr-2 h-5 w-5" />
-              Join Community
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* Enhanced Hero Section with new component */}
+      <EnhancedHero 
+        onViewProducts={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+        onJoinCommunity={handleDiscordContact}
+      />
 
       {/* Enhanced Search and Filter Section */}
-      <section className="py-12 bg-slate-800/50">
+      <section className="py-12 bg-slate-800/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-              <Input
-                placeholder="Search products..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
-              />
-            </div>
-            
-            <div className="flex items-center gap-2">
-              <Filter className="h-4 w-4 text-slate-400" />
-              <div className="flex flex-wrap gap-2">
-                {categories.map((category) => (
-                  <Button
-                    key={category}
-                    variant={selectedCategory === category ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedCategory(category)}
-                    className={selectedCategory === category 
-                      ? "bg-purple-600 hover:bg-purple-700" 
-                      : "border-slate-600 text-slate-300 hover:bg-slate-800"
-                    }
-                  >
-                    {category === "all" ? "All" : category}
-                  </Button>
-                ))}
-              </div>
-            </div>
-          </div>
+          <SearchFilter
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            categories={categories}
+            resultCount={filteredServices.length}
+          />
         </div>
       </section>
 
-      {/* Enhanced Services Grid */}
+      {/* Enhanced Services Grid with new components */}
       <section id="services" className="py-20 bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -318,66 +245,38 @@ export default function Home() {
 
           {filteredServices.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-slate-400 text-lg">No products found matching your criteria.</p>
+              <div className="max-w-md mx-auto">
+                <div className="text-6xl mb-4">🔍</div>
+                <h3 className="text-xl font-semibold text-white mb-2">No products found</h3>
+                <p className="text-slate-400 mb-6">
+                  Try adjusting your search terms or category filter to find what you're looking for.
+                </p>
+                <Button 
+                  variant="outline" 
+                  onClick={() => {
+                    setSearchQuery("");
+                    setSelectedCategory("all");
+                  }}
+                  className="border-slate-600 text-slate-300 hover:bg-slate-800"
+                >
+                  Clear filters
+                </Button>
+              </div>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredServices.map((service, index) => (
-                <Card 
-                  key={service.id} 
-                  className="bg-slate-800 border-slate-700 hover:border-purple-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/10 group"
-                  style={{
-                    animationDelay: `${index * 100}ms`
-                  }}
-                >
-                  <div className="relative overflow-hidden rounded-t-lg">
-                    <img 
-                      src={service.imageUrl} 
-                      alt={service.title}
-                      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-                  
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <h3 className="text-xl font-semibold text-white group-hover:text-purple-400 transition-colors">
-                        {service.title}
-                      </h3>
-                      {service.badge && (
-                        <Badge variant={getBadgeVariant(service.badge)} className="ml-2">
-                          {service.badge}
-                        </Badge>
-                      )}
-                    </div>
-                    
-                    <p className="text-slate-300 mb-4 line-clamp-2">
-                      {service.description}
-                    </p>
-                    
-                    <ul className="text-sm text-slate-400 mb-6 space-y-1">
-                      {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-center">
-                          <CheckCircle className="text-green-400 mr-2 h-4 w-4 flex-shrink-0" />
-                          <span className="truncate">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl font-bold text-purple-400">
-                        {formatPrice(service.price)}
-                      </span>
-                      <Button 
-                        className="bg-purple-600 hover:bg-purple-700 text-white transition-all duration-300 hover:scale-105"
-                        onClick={() => handleBuyNow(service.title)}
-                      >
-                        Get Access
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+              <Suspense fallback={
+                Array.from({ length: 6 }).map((_, i) => <ServiceCardSkeleton key={i} />)
+              }>
+                {filteredServices.map((service, index) => (
+                  <ServiceCard
+                    key={service.id}
+                    service={service}
+                    onBuyNow={handleBuyNow}
+                    index={index}
+                  />
+                ))}
+              </Suspense>
             </div>
           )}
         </div>
