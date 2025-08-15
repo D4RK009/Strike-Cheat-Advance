@@ -12,6 +12,7 @@ import { EnhancedHero } from "@/components/ui/enhanced-hero";
 import { PageLoadingSkeleton, ServiceCardSkeleton } from "@/components/ui/loading-skeleton";
 import { ContactModal } from "@/components/ui/contact-modal";
 import { StatsDisplay } from "@/components/ui/stats-display";
+import { PerformanceMetrics } from "@/components/ui/performance-metrics";
 
 // Lazy load heavy components for better performance
 const SnowflakeAnimation = lazy(() => import("@/components/ui/snowflakes"));
