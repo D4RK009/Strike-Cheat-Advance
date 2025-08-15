@@ -24,9 +24,12 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const { currentTheme } = useTheme();
 
-  const { data: services, isLoading, error } = useQuery<Service[]>({
+  const { data: servicesData, isLoading, error } = useQuery<{services: Service[], total: number}>({
     queryKey: ["/api/services"],
+    select: (data) => Array.isArray(data) ? { services: data, total: data.length } : data
   });
+
+  const services = servicesData?.services || [];
 
   // Extend loading time to show animation for at least 2 seconds (reduced from 3)
   useState(() => {
