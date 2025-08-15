@@ -1,15 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { CheckCircle, Clock, Star, Menu, X, MessageCircle, Send, ChevronDown, Search, Filter, Zap, Shield, Users, TrendingUp } from "lucide-react";
-import { useState, useMemo } from "react";
+import { CheckCircle, Clock, Star, Menu, X, MessageCircle, Send, ChevronDown, Shield, Users, Award } from "lucide-react";
+import { useState, useMemo, Suspense, lazy } from "react";
 import type { Service } from "@shared/schema";
-import SnowflakeAnimation from "@/components/ui/snowflakes";
 import { ThemeSwitcher } from "@/components/ui/theme-switcher";
 import { useTheme } from "@/contexts/ThemeContext";
-import { Input } from "@/components/ui/input";
+import { SearchFilter } from "@/components/ui/search-filter";
+import { ServiceCard } from "@/components/ui/service-card";
+import { EnhancedHero } from "@/components/ui/enhanced-hero";
+import { PageLoadingSkeleton, ServiceCardSkeleton } from "@/components/ui/loading-skeleton";
+
+// Lazy load heavy components
+const SnowflakeAnimation = lazy(() => import("@/components/ui/snowflakes"));
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
