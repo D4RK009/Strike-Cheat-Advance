@@ -10,8 +10,10 @@ import { SearchFilter } from "@/components/ui/search-filter";
 import { ServiceCard } from "@/components/ui/service-card";
 import { EnhancedHero } from "@/components/ui/enhanced-hero";
 import { PageLoadingSkeleton, ServiceCardSkeleton } from "@/components/ui/loading-skeleton";
+import { ContactModal } from "@/components/ui/contact-modal";
+import { StatsDisplay } from "@/components/ui/stats-display";
 
-// Lazy load heavy components
+// Lazy load heavy components for better performance
 const SnowflakeAnimation = lazy(() => import("@/components/ui/snowflakes"));
 
 export default function Home() {
