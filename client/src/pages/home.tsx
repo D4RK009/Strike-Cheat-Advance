@@ -436,6 +436,9 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Performance Metrics (Development) */}
+      <PerformanceMetrics />
     </div>
   );
 }
