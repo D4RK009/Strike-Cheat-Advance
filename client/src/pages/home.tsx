@@ -287,30 +287,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Enhanced Stats Section */}
-      <section className="bg-slate-800/50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl font-bold text-white mb-4">Trusted Worldwide</h2>
-            <p className="text-slate-400">Join the elite gaming community</p>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { icon: Users, label: "Active Users", value: "10K+", color: "text-blue-400" },
-              { icon: Shield, label: "Undetected Rate", value: "99.9%", color: "text-green-400" },
-              { icon: Clock, label: "Support Available", value: "24/7", color: "text-purple-400" },
-              { icon: Star, label: "Average Rating", value: "5★", color: "text-yellow-400" }
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <stat.icon className={`${stat.color} h-8 w-8 mx-auto mb-3`} />
-                <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-slate-400 text-sm">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Enhanced Stats Section with new component */}
+      <StatsDisplay />
 
       {/* Enhanced FAQ Section */}
       <section className="py-20 bg-slate-900">
