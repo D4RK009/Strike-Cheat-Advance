@@ -35,12 +35,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
         services = services.slice(startIndex, startIndex + maxResults);
       }
       
-      // Add metadata for frontend
-      res.json({
-        services,
-        total: services.length,
-        hasMore: startIndex + maxResults < services.length
-      });
+      // For backward compatibility, return array format if no query params
+      if (!search && !category && !limit && !offset) {
+        res.json(services);
+      } else {
+        // Add metadata for frontend when using filtering/pagination
+        res.json({
+          services,
+          total: services.length,
+          hasMore: startIndex + maxResults < services.length
+        });
+      }
     } catch (error) {
       console.error('Error fetching services:', error);
       res.status(500).json({ message: "Failed to fetch services" });
