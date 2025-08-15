@@ -64,6 +64,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get popular/featured services (must be before :id route)
+  app.get("/api/services/featured", async (req, res) => {
+    try {
+      const services = await storage.getAllServices();
+      const featuredServices = services.filter(service => 
+        service.badge === 'Popular' || service.badge === 'VIP' || service.badge === 'Hot'
+      );
+      res.json(featuredServices);
+    } catch (error) {
+      console.error('Error fetching featured services:', error);
+      res.status(500).json({ message: "Failed to fetch featured services" });
+    }
+  });
+
   // Get single service with detailed information
   app.get("/api/services/:id", async (req, res) => {
     try {
@@ -75,20 +89,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error('Error fetching service:', error);
       res.status(500).json({ message: "Failed to fetch service" });
-    }
-  });
-
-  // Get popular/featured services
-  app.get("/api/services/featured", async (req, res) => {
-    try {
-      const services = await storage.getAllServices();
-      const featuredServices = services.filter(service => 
-        service.badge === 'Popular' || service.badge === 'VIP' || service.badge === 'Hot'
-      );
-      res.json(featuredServices);
-    } catch (error) {
-      console.error('Error fetching featured services:', error);
-      res.status(500).json({ message: "Failed to fetch featured services" });
     }
   });
 
