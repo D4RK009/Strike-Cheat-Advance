@@ -1,0 +1,31 @@
+Serving HTML, open the Preview to see your output.
+To see changes you make, you can hit the refresh button in the preview, you do not have to stop and run again.
+Console logs are available in the Preview devtools or your browser devtools.
+2025-08-15T00:34:49.772474Z  INFO static_web_server::info: static-web-server 2.33.1
+2025-08-15T00:34:49.772504Z  INFO static_web_server::info: log level: error
+2025-08-15T00:34:49.772517Z  INFO static_web_server::info: config file used: /home/runner/workspace/.config/static-web-server.toml
+2025-08-15T00:34:49.773028Z  INFO static_web_server::info: server bound to tcp socket 0.0.0.0:80
+2025-08-15T00:34:49.773041Z  INFO static_web_server::info: runtime worker threads: 1
+2025-08-15T00:34:49.773044Z  INFO static_web_server::info: runtime max blocking threads: 512
+2025-08-15T00:34:49.773082Z  INFO static_web_server::info: redirect trailing slash: enabled=true
+2025-08-15T00:34:49.773096Z  INFO static_web_server::info: ignore hidden files: enabled=true
+2025-08-15T00:34:49.773100Z  INFO static_web_server::info: disable symlinks: enabled=true
+2025-08-15T00:34:49.773103Z  INFO static_web_server::info: grace period before graceful shutdown: 0s
+2025-08-15T00:34:49.773113Z  INFO static_web_server::info: index files: index.html
+2025-08-15T00:34:49.773117Z  INFO static_web_server::info: directory listing: enabled=false
+2025-08-15T00:34:49.773120Z  INFO static_web_server::info: directory listing order code: 6
+2025-08-15T00:34:49.773127Z  INFO static_web_server::info: directory listing format: Html
+2025-08-15T00:34:49.773137Z  INFO static_web_server::info: fallback page: enabled=false, value=""
+2025-08-15T00:34:49.773143Z  INFO static_web_server::info: health endpoint: enabled=false
+2025-08-15T00:34:49.773146Z  INFO static_web_server::info: log requests with remote and real IP addresses: enabled=false
+2025-08-15T00:34:49.773157Z  INFO static_web_server::info: cors enabled=true, allow_methods=[GET,HEAD,OPTIONS], allow_origins=*, allow_headers=[origin,content-type,authorization], expose_headers=[origin,content-type]
+2025-08-15T00:34:49.773168Z  INFO static_web_server::info: basic authentication: enabled=false
+2025-08-15T00:34:49.773175Z  INFO static_web_server::info: maintenance mode: enabled=false
+2025-08-15T00:34:49.773178Z  INFO static_web_server::info: maintenance mode status: 503
+2025-08-15T00:34:49.773186Z  INFO static_web_server::info: maintenance mode file: ""
+2025-08-15T00:34:49.773192Z  INFO static_web_server::info: compression static: enabled=false
+2025-08-15T00:34:49.773196Z  INFO static_web_server::info: auto compression: enabled=true, formats=deflate,gzip,brotli,zstd, compression level=Default
+2025-08-15T00:34:49.773203Z  INFO static_web_server::info: cache control headers: enabled=false
+2025-08-15T00:34:49.773206Z  INFO static_web_server::info: security headers: enabled=false
+2025-08-15T00:34:49.773267Z  INFO static_web_server::info: http1 server is listening on http://0.0.0.0:80
+2025-08-15T00:34:49.773276Z  INFO static_web_server::info: press ctrl+c to shut down the server
