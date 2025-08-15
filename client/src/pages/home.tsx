@@ -398,6 +398,16 @@ export default function Home() {
                   <Send className="h-4 w-4" />
                   <span>Telegram Group</span>
                 </div>
+                <div className="pt-2">
+                  <ContactModal 
+                    trigger={
+                      <Button variant="outline" size="sm" className="border-slate-600 text-slate-300 hover:bg-slate-800">
+                        <MessageCircle className="mr-2 h-4 w-4" />
+                        Contact Support
+                      </Button>
+                    }
+                  />
+                </div>
               </div>
             </div>
           </div>
